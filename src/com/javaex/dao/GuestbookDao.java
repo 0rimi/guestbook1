@@ -197,13 +197,12 @@ public class GuestbookDao {
 			query += " 		  to_char(reg_date, 'yyyy-mm-dd hh24:mi:ss') reg_date ";
 			query += " FROM guestbook ";
 			query += " WHERE no like ? ";
-			query += " ORDER BY reg_date desc ";
 			
 			//쿼리문 만들기
 			pstmt = conn.prepareStatement(query);
 			
 			//바인딩
-			pstmt.setInt(1, index);
+			pstmt.setInt(1, index );
 						
 			//실행
 			rs = pstmt.executeQuery();
@@ -222,7 +221,6 @@ public class GuestbookDao {
 				guestbookVo.setPassword(password);
 				guestbookVo.setContent(content);
 				guestbookVo.setRegDate(regDate);
-
 			}
 			
 		} catch (SQLException e) {
