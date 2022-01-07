@@ -62,6 +62,7 @@ public class GuestbookDao {
 	//insert
 	public void insert(GuestbookVo guestbookVo) {
 		
+		int count = 0;
 		this.getConnection();
 		
 		try {
@@ -82,9 +83,10 @@ public class GuestbookDao {
 			pstmt.setString(3, guestbookVo.getContent());
 						
 			//실행
-			rs = pstmt.executeQuery();
+			count = pstmt.executeUpdate();
 				
 		// 4.결과처리
+			System.out.println(count + "건 삽입");
 			
 		} catch (SQLException e) {
 		System.out.println("error:" + e);
@@ -94,9 +96,49 @@ public class GuestbookDao {
 		
 	}
 	
-	//delete
-		public void delete(int index) {
+		//delete
+		public void delete(GuestbookVo vo) {
 			
+			int count = 0;
+			this.getConnection();
+			
+			try {
+								
+				// 3. SQL문 준비 / 바인딩 / 실행
+				
+				//문자열준비
+				String query = "";
+				query = " DELETE FROM guestbook ";
+				query = " WHERE no = ? ";
+				query = " AND password = ? ";
+							
+				//쿼리문 만들기
+				pstmt = conn.prepareStatement(query);
+				
+				//바인딩
+				pstmt.setInt(1, vo.getNo()); // 첫번째 물음표
+				pstmt.setString(2, vo.getPassword());
+							
+				//실행
+				count = pstmt.executeUpdate();
+					
+				// 4.결과처리
+				
+				 System.out.println(count + "건 삭제");
+				
+			} catch (SQLException e) {
+			System.out.println("error:" + e);
+			}
+			
+			this.getclose();
+			
+			
+		}
+		
+		//delete
+		public void delete2(int index) {
+			
+			int count = 0;
 			this.getConnection();
 			
 			try {
@@ -105,9 +147,9 @@ public class GuestbookDao {
 				
 				//문자열준비
 				String query = "";
-				query = " DELETE FROM guestsbook ";
-				query = " WHERE no = ? ";
-							
+				query = " delete from guestbook ";
+				query = " where no = ? ";				
+				
 				//쿼리문 만들기
 				pstmt = conn.prepareStatement(query);
 				
@@ -115,9 +157,11 @@ public class GuestbookDao {
 				pstmt.setInt(1, index); // 첫번째 물음표
 							
 				//실행
-				rs = pstmt.executeQuery();
+				count = pstmt.executeUpdate();
 					
-			// 4.결과처리
+				// 4.결과처리
+				
+				 System.out.println(count + "건 삭제");
 				
 			} catch (SQLException e) {
 			System.out.println("error:" + e);

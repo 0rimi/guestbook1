@@ -7,6 +7,7 @@
  	//파라미터값 받기, 삭제테이블의 넘버 가져오기.
  	String num = request.getParameter("no");
  	int no = Integer.parseInt(num);
+ 	
  
  %>
 <!DOCTYPE html>

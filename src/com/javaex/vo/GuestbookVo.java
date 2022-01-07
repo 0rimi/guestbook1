@@ -10,7 +10,12 @@ public class GuestbookVo {
 	private String regDate;
 	
 	//생성자
-	public GuestbookVo() {}
+	public GuestbookVo() {};
+	public GuestbookVo(int no, String password) {
+		super();
+		this.no = no;
+		this.password = password;
+	};
 	public GuestbookVo(String name, String password, String content) {
 		super();
 		this.name = name;
