@@ -97,41 +97,42 @@ public class GuestbookDao {
 	}
 	
 		//delete
-		public void delete(GuestbookVo vo) {
+		public int delete(GuestbookVo vo) {
 			
 			int count = 0;
-			this.getConnection();
+			getConnection();
 			
 			try {
 								
 				// 3. SQL문 준비 / 바인딩 / 실행
 				
 				//문자열준비
-				String query = "";
-				query = " DELETE FROM guestbook ";
-				query = " WHERE no = ? ";
-				query = " AND password = ? ";
+				 String query ="";
+		         query += " delete from guestbook "; 
+		         query += " where no= ? " ; 
+		         query += " and password= ? " ;
+
 							
 				//쿼리문 만들기
-				pstmt = conn.prepareStatement(query);
+		        pstmt = conn.prepareStatement(query);
 				
 				//바인딩
-				pstmt.setInt(1, vo.getNo()); // 첫번째 물음표
-				pstmt.setString(2, vo.getPassword());
+		        pstmt.setInt(1, vo.getNo());
+		        pstmt.setString(2, vo.getPassword());
+
 							
 				//실행
 				count = pstmt.executeUpdate();
 					
 				// 4.결과처리
-				
-				 System.out.println(count + "건 삭제");
+				System.out.println(count + "건 삭제");
 				
 			} catch (SQLException e) {
 			System.out.println("error:" + e);
 			}
 			
-			this.getclose();
-			
+			getclose();
+		    return count;
 			
 		}
 		
@@ -146,22 +147,23 @@ public class GuestbookDao {
 				// 3. SQL문 준비 / 바인딩 / 실행
 				
 				//문자열준비
-				String query = "";
-				query = " delete from guestbook ";
-				query = " where no = ? ";				
-				
+				 String query ="";
+		         query += " delete from guestbook "; 
+		         query += " where no= ? " ; 
+
+							
 				//쿼리문 만들기
-				pstmt = conn.prepareStatement(query);
+		        pstmt = conn.prepareStatement(query);
 				
 				//바인딩
-				pstmt.setInt(1, index); // 첫번째 물음표
+		        pstmt.setInt(1, index );
+
 							
 				//실행
 				count = pstmt.executeUpdate();
 					
 				// 4.결과처리
-				
-				 System.out.println(count + "건 삭제");
+				System.out.println(count + "건 삭제");
 				
 			} catch (SQLException e) {
 			System.out.println("error:" + e);
